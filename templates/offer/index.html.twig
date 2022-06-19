@@ -1,23 +1,14 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>PHPJabbers.com | Free Car Rental Website Template</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
-    <noscript><link rel="stylesheet" href="{{ asset('assets/css/noscript.css') }}" /></noscript>
-</head>
-<body class="is-preload">
-<!-- Wrapper -->
-<div id="wrapper">
+{% extends 'layout/layout.html.twig' %}
+
+
+{% block header %}
 
     <!-- Header -->
     <header id="header">
         <div class="inner">
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="{{ path('app_home') }}" class="logo">
                 <span class="fa fa-car"></span> <span class="title">CAR RENTAL WEBSITE</span>
             </a>
 
@@ -30,47 +21,22 @@
 
         </div>
     </header>
-
-    <!-- Menu -->
-    <nav id="menu">
-        <h2>Menu</h2>
-        <ul>
-            <li><a href="index.html">Home</a></li>
-
-            <li><a href="offers.html" class="active">Offers</a></li>
-
-            <li><a href="fleet.html">Fleet</a></li>
-
-            <li>
-                <a href="#" class="dropdown-toggle">About</a>
-
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="blog.html">Blog</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                </ul>
-            </li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
-
+{% endblock %}
+{% block main %}
     <!-- Main -->
     <div id="main">
         <div class="inner">
             <h1>Offers</h1>
 
             <div class="image main">
-                <img src="{{ asset('images/banner-image-6-1920x500.jpg') }}" class="img-fluid" alt="" />
+                <img src="{{ asset('images/banner-image-6-1920x500.jpg') }}" class="img-fluid" alt=""/>
             </div>
 
             <!-- Offers -->
             <section class="tiles">
                 <article class="style1">
 									<span class="image">
-										<img src="{{ asset('images/other-1-720x480.jpg') }}" alt="" />
+										<img src="{{ asset('images/other-1-720x480.jpg') }}" alt=""/>
 									</span>
                     <a href="#footer" class="scrolly">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
@@ -78,13 +44,14 @@
                         <p>price from: <strong> $ 140.00</strong> per weekend</p>
 
                         <div class="content">
-                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
+                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui
+                                pulvinar imperdiet. Nunc consectetur.</p>
                         </div>
                     </a>
                 </article>
                 <article class="style2">
 									<span class="image">
-										<img src="{{ asset('images/other-2-720x480.jpg') }}" alt="" />
+										<img src="{{ asset('images/other-2-720x480.jpg') }}" alt=""/>
 									</span>
                     <a href="#footer" class="scrolly">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
@@ -92,13 +59,14 @@
                         <p>price from: <strong> $ 140.00</strong> per weekend</p>
 
                         <div class="content">
-                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
+                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui
+                                pulvinar imperdiet. Nunc consectetur.</p>
                         </div>
                     </a>
                 </article>
                 <article class="style3">
 									<span class="image">
-										<img src="{{ asset('images/other-3-720x480.jpg') }}" alt="" />
+										<img src="{{ asset('images/other-3-720x480.jpg') }}" alt=""/>
 									</span>
                     <a href="#footer" class="scrolly">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
@@ -106,14 +74,15 @@
                         <p>price from: <strong> $ 140.00</strong> per weekend</p>
 
                         <div class="content">
-                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
+                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui
+                                pulvinar imperdiet. Nunc consectetur.</p>
                         </div>
                     </a>
                 </article>
 
                 <article class="style4">
 									<span class="image">
-										<img src="{{ asset('images/other-4-720x480.jpg') }}" alt="" />
+										<img src="{{ asset('images/other-4-720x480.jpg') }}" alt=""/>
 									</span>
                     <a href="#footer" class="scrolly">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
@@ -121,14 +90,15 @@
                         <p>price from: <strong> $ 140.00</strong> per weekend</p>
 
                         <div class="content">
-                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
+                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui
+                                pulvinar imperdiet. Nunc consectetur.</p>
                         </div>
                     </a>
                 </article>
 
                 <article class="style5">
 									<span class="image">
-										<img src="{{ asset('images/other-5-720x480.jpg') }}" alt="" />
+										<img src="{{ asset('images/other-5-720x480.jpg') }}" alt=""/>
 									</span>
                     <a href="#footer" class="scrolly">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
@@ -136,14 +106,15 @@
                         <p>price from: <strong> $ 140.00</strong> per weekend</p>
 
                         <div class="content">
-                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
+                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui
+                                pulvinar imperdiet. Nunc consectetur.</p>
                         </div>
                     </a>
                 </article>
 
                 <article class="style6">
 									<span class="image">
-										<img src="{{ asset('images/other-5-720x480.jpg') }}" alt="" />
+										<img src="{{ asset('images/other-5-720x480.jpg') }}" alt=""/>
 									</span>
                     <a href="#footer" class="scrolly">
                         <h2>Lorem ipsum dolor sit amet, consectetur</h2>
@@ -151,13 +122,18 @@
                         <p>price from: <strong> $ 140.00</strong> per weekend</p>
 
                         <div class="content">
-                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui pulvinar imperdiet. Nunc consectetur.</p>
+                            <p>Vestibulum id est eu felis vulputate hendrerit. Suspendisse dapibus turpis in dui
+                                pulvinar imperdiet. Nunc consectetur.</p>
                         </div>
                     </a>
                 </article>
             </section>
         </div>
     </div>
+
+{% endblock %}
+
+{% block footer %}
 
     <!-- Footer -->
     <footer id="footer">
@@ -167,7 +143,7 @@
                 <form method="post" action="#">
                     <div class="fields">
                         <div class="field half">
-                            <input type="text" name="name" id="name" placeholder="Your Name" />
+                            <input type="text" name="name" id="name" placeholder="Your Name"/>
                         </div>
 
                         <div class="field half">
@@ -180,19 +156,19 @@
                         </div>
 
                         <div class="field half">
-                            <input type="text" name="date-from" id="date-from" placeholder="Pick-up date/time" />
+                            <input type="text" name="date-from" id="date-from" placeholder="Pick-up date/time"/>
                         </div>
 
                         <div class="field half">
-                            <input type="text" name="date-to" id="date-to" placeholder="Return date/tiem" />
+                            <input type="text" name="date-to" id="date-to" placeholder="Return date/tiem"/>
                         </div>
 
                         <div class="field half">
-                            <input type="text" name="email" id="email" placeholder="Email" />
+                            <input type="text" name="email" id="email" placeholder="Email"/>
                         </div>
 
                         <div class="field half">
-                            <input type="text" name="phone" id="phone" placeholder="Phone" />
+                            <input type="text" name="phone" id="phone" placeholder="Phone"/>
                         </div>
 
                         <div class="field">
@@ -203,7 +179,7 @@
                             <label>&nbsp;</label>
 
                             <ul class="actions">
-                                <li><input type="submit" value="Book now" class="primary" /></li>
+                                <li><input type="submit" value="Book now" class="primary"/></li>
                             </ul>
                         </div>
                     </div>
@@ -214,8 +190,10 @@
 
                 <ul class="alt">
                     <li><span class="fa fa-envelope-o"></span> <a href="#">contact@company.com</a></li>
-                    <li><span class="fa fa-phone"></span> +1 333 4040 5566 </li>
-                    <li><span class="fa fa-map-pin"></span> 212 Barrington Court New York, ABC 10001 United States of America</li>
+                    <li><span class="fa fa-phone"></span> +1 333 4040 5566</li>
+                    <li><span class="fa fa-map-pin"></span> 212 Barrington Court New York, ABC 10001 United States of
+                        America
+                    </li>
                 </ul>
 
                 <h2>Follow Us</h2>
@@ -229,20 +207,14 @@
             </section>
 
             <ul class="copyright">
-                <li>Copyright © 2020 Company Name </li>
+                <li>Copyright © 2020 Company Name</li>
                 <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
             </ul>
         </div>
     </footer>
 
-</div>
+{% endblock %}
 
-<!-- Scripts -->
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{  asset('assets/js/jquery.scrolly.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.scrollex.min.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
 
-</body>
-</html>
+
+
