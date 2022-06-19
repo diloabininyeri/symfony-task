@@ -1,23 +1,13 @@
-<!DOCTYPE HTML>
-<html>
-<head>
-    <title>PHPJabbers.com | Free Car Rental Website Template</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}" />
-    <link rel="stylesheet" href="{{ asset('assets/css/main.css') }}" />
-    <noscript><link rel="stylesheet" href="{{ asset('assets/css/noscript.css') }}" /></noscript>
-</head>
-<body class="is-preload">
-<!-- Wrapper -->
-<div id="wrapper">
+{% extends 'layout/layout.html.twig' %}
 
-    <!-- Header -->
+{# header start #}
+{% block header %}
+
     <header id="header">
         <div class="inner">
 
             <!-- Logo -->
-            <a href="index.html" class="logo">
+            <a href="{{ path('app_home') }}" class="logo">
                 <span class="fa fa-car"></span> <span class="title">CAR RENTAL WEBSITE</span>
             </a>
 
@@ -30,40 +20,18 @@
 
         </div>
     </header>
+{% endblock %}
 
-    <!-- Menu -->
-    <nav id="menu">
-        <h2>Menu</h2>
-        <ul>
-            <li><a href="index.html">Home</a></li>
+{# header end #}
 
-            <li><a href="offers.html">Offers</a></li>
-
-            <li><a href="fleet.html">Fleet</a></li>
-
-            <li>
-                <a href="#" class="dropdown-toggle">About</a>
-
-                <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="blog.html" class="active">Blog</a></li>
-                    <li><a href="testimonials.html">Testimonials</a></li>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="terms.html">Terms</a></li>
-                </ul>
-            </li>
-            <li><a href="contact.html">Contact Us</a></li>
-        </ul>
-    </nav>
-
-    <!-- Main -->
+{# main-start #}
+{% block main %}
     <div id="main">
         <div class="inner">
             <h1>Blog</h1>
 
             <div class="image main">
-                <img src="{{ asset('images/banner-image-6-1920x500.jpg') }}" class="img-fluid" alt="" />
+                <img src="{{ asset('images/banner-image-6-1920x500.jpg') }}" class="img-fluid" alt=""/>
             </div>
 
             <div class="container-fluid">
@@ -71,33 +39,37 @@
                     <div class="col-9">
                         <div class="row">
                             <div class="col-sm-6 text-center">
-                                <img src="{{ asset('images/blog-1-720x480.jpg') }}" class="img-fluid" alt="" />
+                                <img src="{{ asset('images/blog-1-720x480.jpg') }}" class="img-fluid" alt=""/>
 
-                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
-
-                                <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
-                            </div>
-
-                            <div class="col-sm-6 text-center">
-                                <img src="{{ asset('images/blog-2-720x480.jpg') }}" class="img-fluid" alt="" />
-
-                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit.</a></h2>
 
                                 <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
                             </div>
 
                             <div class="col-sm-6 text-center">
-                                <img src="{{ asset('images/blog-3-720x480.jpg') }}" class="img-fluid" alt="" />
+                                <img src="{{ asset('images/blog-2-720x480.jpg') }}" class="img-fluid" alt=""/>
 
-                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit.</a></h2>
 
                                 <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
                             </div>
 
                             <div class="col-sm-6 text-center">
-                                <img src="{{ asset('images/blog-3-720x480.jpg') }}" class="img-fluid" alt="" />
+                                <img src="{{ asset('images/blog-3-720x480.jpg') }}" class="img-fluid" alt=""/>
 
-                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</a></h2>
+                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit.</a></h2>
+
+                                <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
+                            </div>
+
+                            <div class="col-sm-6 text-center">
+                                <img src="{{ asset('images/blog-3-720x480.jpg') }}" class="img-fluid" alt=""/>
+
+                                <h2 class="m-n"><a href="blog-post.html">Lorem ipsum dolor sit amet, consectetur
+                                        adipisicing elit.</a></h2>
 
                                 <p> John Doe &nbsp;|&nbsp; 12/06/2020 10:30</p>
                             </div>
@@ -111,7 +83,8 @@
 
                         <div class="form-group">
                             <div class="input-group">
-                                <input type="text" class="form-control" placeholder="Search" aria-label="Search" aria-describedby="basic-addon2">
+                                <input type="text" class="form-control" placeholder="Search" aria-label="Search"
+                                       aria-describedby="basic-addon2">
 
                                 <span class="input-group-addon"><a href="#"><i class="fa fa-search"></i></a></span>
                             </div>
@@ -132,7 +105,12 @@
         </div>
     </div>
 
-    <!-- Footer -->
+{% endblock %}
+{# main end #}
+
+
+{# footer start #}
+{% block footer %}
     <footer id="footer">
         <div class="inner">
             <section>
@@ -147,20 +125,11 @@
             </section>
 
             <ul class="copyright">
-                <li>Copyright © 2020 Company Name </li>
+                <li>Copyright © 2020 Company Name</li>
                 <li>Template by: <a href="https://www.phpjabbers.com/">PHPJabbers.com</a></li>
             </ul>
         </div>
     </footer>
+{% endblock %}
 
-</div>
-
-<!-- Scripts -->
-<script src="{{ asset('assets/js/jquery.min.js') }}"></script>
-<script src="{{ asset('assets/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.scrolly.min.js') }}"></script>
-<script src="{{ asset('assets/js/jquery.scrollex.min.js') }}"></script>
-<script src="{{ asset('assets/js/main.js') }}"></script>
-
-</body>
-</html>
+{# footer end #}
