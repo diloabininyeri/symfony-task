@@ -7,4 +7,5 @@ sudo apt install symfony-cli -y
 symfony console make:migration
 symfony console doctrine:database:create
 symfony console doctrine:migrations:migrate
+symfony console doctrine:fixtures:load
 symfony serve
