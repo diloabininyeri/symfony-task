@@ -1,5 +1,6 @@
 {% if app.user %}
-    <h2><div class="alert alert-info">You are already logged in!</div></h2>
+   <div class="alert alert-info">{{ app.user.email }}
+       <br>You are already logged in!</div>
     <br>
     <a href="{{ path('app_logout') }}">Switch Another Account</a>
 
