@@ -25,6 +25,12 @@ class Vehicle
     #[ORM\Column(type: 'string', length: 255)]
     private $image;
 
+    #[
+        ORM\ManyToOne(targetEntity: Color::class, inversedBy: 'vehicles', /*fetch: 'EAGER'*/),
+        ORM\JoinColumn(name: "color_id", referencedColumnName: "id")
+    ]
+    private $color;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +80,18 @@ class Vehicle
     public function setImage(string $image): self
     {
         $this->image = $image;
+
+        return $this;
+    }
+
+    public function getColor(): ?Color
+    {
+        return $this->color;
+    }
+
+    public function setColor(?Color $color): self
+    {
+        $this->color = $color;
 
         return $this;
     }

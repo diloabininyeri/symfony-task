@@ -3,6 +3,7 @@
 namespace App\Service;
 
 use App\Entity\User;
+use App\Entity\Vehicle;
 use App\Structure\Interfaces\TestServiceInterface;
 use Doctrine\Persistence\ManagerRegistry;
 
@@ -18,6 +19,8 @@ class TestService implements TestServiceInterface
 
     public function test(): array
     {
-        return $this->managerRegistry->getRepository(User::class)->findAll();
+        $vehicle = $this->managerRegistry->getRepository(Vehicle::class)->find(1);
+
+        dd($vehicle->getColor()->getName());
     }
 }

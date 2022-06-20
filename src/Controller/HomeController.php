@@ -15,6 +15,8 @@ class HomeController extends AbstractController
     ]
     public function index(TestServiceInterface $testService): Response
     {
+
+        $testService->test();
         return $this->render('home/index.html.twig', [
             'controller_name' => 'HomeController',
         ]);
