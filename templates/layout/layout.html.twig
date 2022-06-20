@@ -1,7 +1,7 @@
 <!DOCTYPE HTML>
 <html lang="en">
 <head>
-    <title>Symfony rent system</title>
+    <title>{% block title %}Symfony rent system{% endblock %}</title>
     <meta charset="utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no"/>
     <link rel="stylesheet" href="{{ asset('assets/bootstrap/css/bootstrap.min.css') }}"/>
@@ -38,9 +38,11 @@
                     <li><a href="{{ path('app_testimonials') }}">Testimonials</a></li>
                     <li><a href="{{ path('app_faq') }}">FAQ</a></li>
                     <li><a href="{{ path('app_term') }}">Terms</a></li>
+
                 </ul>
             </li>
             <li><a href="{{ path('app_contact') }}">Contact Us</a></li>
+            <li><a href="{{ path('app_login') }}#form">Login</a></li>
         </ul>
     </nav>
 
