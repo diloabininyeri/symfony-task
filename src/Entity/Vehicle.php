@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\VehicleRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 #[ORM\Entity(repositoryClass: VehicleRepository::class), ORM\Table(name: 'vehicles')]
@@ -30,6 +32,14 @@ class Vehicle
         ORM\JoinColumn(name: "color_id", referencedColumnName: "id")
     ]
     private $color;
+
+    #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: RentedVehicle::class)]
+    private $rentedVehicles;
+
+    public function __construct()
+    {
+        $this->rentedVehicles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -92,6 +102,36 @@ class Vehicle
     public function setColor(?Color $color): self
     {
         $this->color = $color;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, RentedVehicle>
+     */
+    public function getRentedVehicles(): Collection
+    {
+        return $this->rentedVehicles;
+    }
+
+    public function addRentedVehicle(RentedVehicle $rentedVehicle): self
+    {
+        if (!$this->rentedVehicles->contains($rentedVehicle)) {
+            $this->rentedVehicles[] = $rentedVehicle;
+            $rentedVehicle->setVehicles($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRentedVehicle(RentedVehicle $rentedVehicle): self
+    {
+        if ($this->rentedVehicles->removeElement($rentedVehicle)) {
+            // set the owning side to null (unless already changed)
+            if ($rentedVehicle->getVehicles() === $this) {
+                $rentedVehicle->setVehicles(null);
+            }
+        }
 
         return $this;
     }

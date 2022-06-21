@@ -25,6 +25,12 @@ class RentedVehicle
     #[ORM\Column(type: 'integer')]
     private $vehicle_id;
 
+    #[ORM\ManyToOne(targetEntity: User::class, inversedBy: 'rentedVehicles'),ORM\JoinColumn(name: 'user_id')]
+    private $users;
+
+    #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: 'rentedVehicles'),ORM\JoinColumn(name: 'vehicle_id')]
+    private $vehicles;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +80,30 @@ class RentedVehicle
     public function setVehicleId(int $vehicle_id): self
     {
         $this->vehicle_id = $vehicle_id;
+
+        return $this;
+    }
+
+    public function getUsers(): ?User
+    {
+        return $this->users;
+    }
+
+    public function setUsers(?User $users): self
+    {
+        $this->users = $users;
+
+        return $this;
+    }
+
+    public function getVehicles(): ?Vehicle
+    {
+        return $this->vehicles;
+    }
+
+    public function setVehicles(?Vehicle $vehicles): self
+    {
+        $this->vehicles = $vehicles;
 
         return $this;
     }

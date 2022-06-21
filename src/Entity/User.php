@@ -3,6 +3,8 @@
 namespace App\Entity;
 
 use App\Repository\UserRepository;
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
@@ -25,6 +27,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: 'string')]
     private $password;
+
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: RentedVehicle::class),ORM\JoinColumn(name: 'user_id')]
+    private $rentedVehicles;
+
+    public function __construct()
+    {
+        $this->rentedVehicles = new ArrayCollection();
+    }
 
     public function getId(): ?int
     {
@@ -94,5 +104,35 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
+    }
+
+    /**
+     * @return Collection<int, RentedVehicle>
+     */
+    public function getRentedVehicles(): Collection
+    {
+        return $this->rentedVehicles;
+    }
+
+    public function addRentedVehicle(RentedVehicle $rentedVehicle): self
+    {
+        if (!$this->rentedVehicles->contains($rentedVehicle)) {
+            $this->rentedVehicles[] = $rentedVehicle;
+            $rentedVehicle->setUsers($this);
+        }
+
+        return $this;
+    }
+
+    public function removeRentedVehicle(RentedVehicle $rentedVehicle): self
+    {
+        if ($this->rentedVehicles->removeElement($rentedVehicle)) {
+            // set the owning side to null (unless already changed)
+            if ($rentedVehicle->getUsers() === $this) {
+                $rentedVehicle->setUsers(null);
+            }
+        }
+
+        return $this;
     }
 }
