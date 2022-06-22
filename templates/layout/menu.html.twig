@@ -24,4 +24,11 @@
     {% else %}
         <li><a href="{{ path('app_login') }}#form">Login</a></li>
     {% endif %}
+
+    {% if  app.user %}
+
+        {%  if app.user.isAdmin==1 %}
+        <li><a href="{{ path('app_admin_home') }}#form">Admin Panel</a></li>
+            {% endif %}
+    {% endif %}
 </ul>

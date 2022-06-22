@@ -150,7 +150,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = $id;
     }
 
-    public function isIsAdmin(): ?bool
+    public function isAdmin(): ?bool
     {
         return $this->is_admin;
     }
