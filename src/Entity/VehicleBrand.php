@@ -22,7 +22,7 @@ class VehicleBrand
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Vehicle::class)]
-    private ArrayCollection $vehicles;
+    private  $vehicles;
 
     public function __construct()
     {

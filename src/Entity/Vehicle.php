@@ -8,7 +8,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
-
+/**
+ *@todo When type declaration is made, symfony throws an error. In some properties, type declaration can be removed to avoid this error.
+ */
 #[ORM\Entity(repositoryClass: VehicleRepository::class), ORM\Table(name: 'vehicles')]
 class Vehicle
 {
@@ -81,7 +83,7 @@ class Vehicle
     /**
      * @var bool
      */
-    #[ORM\Column(type: 'boolean', options: "{de}")]
+    #[ORM\Column(type: 'boolean')]
     private bool $is_availability = true; //default vehicle rent status is true ,can be change according the status
 
     /**
