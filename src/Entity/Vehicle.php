@@ -1,71 +1,117 @@
-<?php
+<?php /** @noinspection PhpUnused */
 
 namespace App\Entity;
 
 use App\Repository\VehicleRepository;
+use DateTimeImmutable;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+
 #[ORM\Entity(repositoryClass: VehicleRepository::class), ORM\Table(name: 'vehicles')]
 class Vehicle
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
+    /**
+     * @property-read int $id
+     */
     private int $id;
 
+    /**
+     * @var string
+     */
     #[ORM\Column(type: 'string', length: 255)]
     private string $name;
 
+    /**
+     * @var DateTimeImmutable|null
+     */
     #[ORM\Column(type: 'datetime_immutable')]
-    private $created_at;
+    private ?DateTimeImmutable $created_at;
 
+    /**
+     * @var DateTimeImmutable|null
+     */
     #[ORM\Column(type: 'datetime_immutable', nullable: true)]
-    private $updated_at;
+    private ?DateTimeImmutable $updated_at;
 
+    /**
+     * @var string
+     */
     #[ORM\Column(type: 'string', length: 255)]
     private string $image;
 
+    /**
+     * @var Color|null
+     */
     #[
         ORM\ManyToOne(targetEntity: Color::class, inversedBy: 'vehicles', /*fetch: 'EAGER'*/),
         ORM\JoinColumn(name: "color_id", referencedColumnName: "id")
     ]
-    private $color;
+    private ?Color $color;
 
+    /**
+     * @var ArrayCollection
+     */
     #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: RentedVehicle::class)]
-    private $rentedVehicles;
+    private ArrayCollection $rentedVehicles;
 
+    /**
+     * @var VehicleCategory|null
+     */
     #[
         ORM\ManyToOne(targetEntity: VehicleCategory::class, inversedBy: 'vehicles'),
         ORM\JoinColumn(name: "category_id", referencedColumnName: "id")
     ]
-    private $category;
+    private ?VehicleCategory $category;
 
+    /**
+     * @var VehicleBrand|null
+     */
     #[
         ORM\ManyToOne(targetEntity: VehicleBrand::class, inversedBy: 'vehicles'),
         ORM\JoinColumn(name: "brand_id", referencedColumnName: "id")
     ]
-    private $brand;
+    private ?VehicleBrand $brand;
 
+    /**
+     * @var bool
+     */
     #[ORM\Column(type: 'boolean', options: "{de}")]
-    private bool $is_avaliablity = true; //default vehicle rent status is true ,can be change according the status
+    private bool $is_availability = true; //default vehicle rent status is true ,can be change according the status
 
+    /**
+     *
+     */
     public function __construct()
     {
         $this->rentedVehicles = new ArrayCollection();
     }
 
+    /**
+     * @return int|null
+     */
     public function getId(): ?int
     {
         return $this->id;
     }
 
+    /**
+     * @return string|null
+     */
     public function getName(): ?string
     {
         return $this->name;
     }
 
+    /**
+     * @param string $name
+     * @return $this
+     */
     public function setName(string $name): self
     {
         $this->name = $name;
@@ -73,35 +119,57 @@ class Vehicle
         return $this;
     }
 
-    public function getCreatedAt(): ?\DateTimeImmutable
+    /**
+     * @return DateTimeImmutable|null
+     */
+    public function getCreatedAt(): ?DateTimeImmutable
     {
         return $this->created_at;
     }
 
-    public function setCreatedAt(\DateTimeImmutable $created_at): self
+    /**
+     * @param DateTimeImmutable $created_at
+     * @return $this
+     */
+    public function setCreatedAt(DateTimeImmutable $created_at): self
     {
         $this->created_at = $created_at;
 
         return $this;
     }
 
-    public function getUpdatedAt(): ?\DateTimeImmutable
+    /**
+     * @return DateTimeImmutable|null
+     */
+    public function getUpdatedAt(): ?DateTimeImmutable
     {
         return $this->updated_at;
     }
 
-    public function setUpdatedAt(?\DateTimeImmutable $updated_at): self
+
+    /**
+     * @param DateTimeImmutable|null $updated_at
+     * @return $this
+     */
+    public function setUpdatedAt(?DateTimeImmutable $updated_at): self
     {
         $this->updated_at = $updated_at;
 
         return $this;
     }
 
+    /**
+     * @return string|null
+     */
     public function getImage(): ?string
     {
         return $this->image;
     }
 
+    /**
+     * @param string $image
+     * @return $this
+     */
     public function setImage(string $image): self
     {
         $this->image = $image;
@@ -109,11 +177,18 @@ class Vehicle
         return $this;
     }
 
+    /**
+     * @return Color|null
+     */
     public function getColor(): ?Color
     {
         return $this->color;
     }
 
+    /**
+     * @param Color|null $color
+     * @return $this
+     */
     public function setColor(?Color $color): self
     {
         $this->color = $color;
@@ -129,6 +204,10 @@ class Vehicle
         return $this->rentedVehicles;
     }
 
+    /**
+     * @param RentedVehicle $rentedVehicle
+     * @return $this
+     */
     public function addRentedVehicle(RentedVehicle $rentedVehicle): self
     {
         if (!$this->rentedVehicles->contains($rentedVehicle)) {
@@ -139,23 +218,32 @@ class Vehicle
         return $this;
     }
 
+    /**
+     * @param RentedVehicle $rentedVehicle
+     * @return $this
+     */
     public function removeRentedVehicle(RentedVehicle $rentedVehicle): self
     {
-        if ($this->rentedVehicles->removeElement($rentedVehicle)) {
-            // set the owning side to null (unless already changed)
-            if ($rentedVehicle->getVehicles() === $this) {
-                $rentedVehicle->setVehicles(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->rentedVehicles->removeElement($rentedVehicle) && $rentedVehicle->getVehicles() === $this) {
+            $rentedVehicle->setVehicles(null);
         }
 
         return $this;
     }
 
+    /**
+     * @return VehicleCategory|null
+     */
     public function getCategory(): ?VehicleCategory
     {
         return $this->category;
     }
 
+    /**
+     * @param VehicleCategory|null $category
+     * @return $this
+     */
     public function setCategory(?VehicleCategory $category): self
     {
         $this->category = $category;
@@ -163,11 +251,18 @@ class Vehicle
         return $this;
     }
 
+    /**
+     * @return VehicleBrand|null
+     */
     public function getBrand(): ?VehicleBrand
     {
         return $this->brand;
     }
 
+    /**
+     * @param VehicleBrand|null $brand
+     * @return $this
+     */
     public function setBrand(?VehicleBrand $brand): self
     {
         $this->brand = $brand;
@@ -175,15 +270,38 @@ class Vehicle
         return $this;
     }
 
-    public function isIsAvaliablity(): ?bool
+    /**
+     * @return bool|null
+     */
+    public function isIsAvailability(): ?bool
     {
-        return $this->is_avaliablity;
+        return $this->is_availability;
     }
 
-    public function setIsAvaliablity(bool $is_avaliablity): self
+    /**
+     * @param bool $is_availability
+     * @return $this
+     */
+    public function setIsAvailability(bool $is_availability): self
     {
-        $this->is_avaliablity = $is_avaliablity;
+        $this->is_availability = $is_availability;
 
         return $this;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isCanRent(): bool
+    {
+        return $this->is_availability;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 }
