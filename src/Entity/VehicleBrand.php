@@ -1,4 +1,6 @@
-<?php /**@noinspection PhpUnused */
+<?php
+
+/**@noinspection PhpUnused */
 
 namespace App\Entity;
 
@@ -22,7 +24,7 @@ class VehicleBrand
     private string $name;
 
     #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Vehicle::class)]
-    private  $vehicles;
+    private $vehicles;
 
     public function __construct()
     {

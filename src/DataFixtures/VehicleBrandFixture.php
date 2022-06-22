@@ -21,9 +21,7 @@ class VehicleBrandFixture extends Fixture
 
     public function load(ObjectManager $manager): void
     {
-
         foreach ($this->brands as $brand) {
-
             $vehicleBrand = new VehicleBrand();
             $vehicleBrand->setName($brand);
             $manager->persist($vehicleBrand);
