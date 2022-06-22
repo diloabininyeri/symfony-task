@@ -1,4 +1,4 @@
-<?php
+<?php /**@noinspection PhpUnused */
 
 namespace App\Entity;
 
@@ -17,19 +17,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 180, unique: true)]
-    private $email;
+    private ?string $email;
 
     #[ORM\Column(type: 'json')]
-    private $roles = [];
+    private array $roles = [];
 
     #[ORM\Column(type: 'string')]
-    private $password;
+    private string $password;
 
-    #[ORM\OneToMany(mappedBy: 'users', targetEntity: RentedVehicle::class),ORM\JoinColumn(name: 'user_id')]
-    private $rentedVehicles;
+    #[ORM\OneToMany(mappedBy: 'users', targetEntity: RentedVehicle::class), ORM\JoinColumn(name: 'user_id')]
+    private ArrayCollection $rentedVehicles;
 
     public function __construct()
     {
@@ -60,7 +60,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function getUserIdentifier(): string
     {
-        return (string) $this->email;
+        return (string)$this->email;
     }
 
     /**
@@ -100,7 +100,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * @see UserInterface
      */
-    public function eraseCredentials()
+    public function eraseCredentials(): void
     {
         // If you store any temporary, sensitive data on the user, clear it here
         // $this->plainPassword = null;
@@ -126,13 +126,19 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function removeRentedVehicle(RentedVehicle $rentedVehicle): self
     {
-        if ($this->rentedVehicles->removeElement($rentedVehicle)) {
-            // set the owning side to null (unless already changed)
-            if ($rentedVehicle->getUsers() === $this) {
-                $rentedVehicle->setUsers(null);
-            }
+        // set the owning side to null (unless already changed)
+        if ($this->rentedVehicles->removeElement($rentedVehicle) && $rentedVehicle->getUsers() === $this) {
+            $rentedVehicle->setUsers(null);
         }
 
         return $this;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 }
