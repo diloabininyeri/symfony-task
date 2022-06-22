@@ -28,6 +28,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'string')]
     private string $password;
 
+    /**
+     * @todo  may type declaration will be remove ,because symfony cant assign it  by orm when type declared ...
+     */
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: RentedVehicle::class), ORM\JoinColumn(name: 'user_id')]
     private ArrayCollection $rentedVehicles;
 
