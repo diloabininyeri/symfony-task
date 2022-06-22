@@ -31,6 +31,12 @@ class RentedVehicle
     #[ORM\ManyToOne(targetEntity: Vehicle::class, inversedBy: 'rentedVehicles'),ORM\JoinColumn(name: 'vehicle_id')]
     private $vehicles;
 
+    #[ORM\Column(type: 'date_immutable')]
+    private $rental_date;
+
+    #[ORM\Column(type: 'date_immutable',nullable: true)]
+    private $delivery_date;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -104,6 +110,30 @@ class RentedVehicle
     public function setVehicles(?Vehicle $vehicles): self
     {
         $this->vehicles = $vehicles;
+
+        return $this;
+    }
+
+    public function getRentalDate(): ?\DateTimeImmutable
+    {
+        return $this->rental_date;
+    }
+
+    public function setRentalDate(\DateTimeImmutable $rental_date): self
+    {
+        $this->rental_date = $rental_date;
+
+        return $this;
+    }
+
+    public function getDeliveryDate(): ?\DateTimeImmutable
+    {
+        return $this->delivery_date;
+    }
+
+    public function setDeliveryDate(\DateTimeImmutable $delivery_date): self
+    {
+        $this->delivery_date = $delivery_date;
 
         return $this;
     }
