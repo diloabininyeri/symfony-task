@@ -42,6 +42,15 @@ class Vehicle
     ]
     private $category;
 
+    #[
+        ORM\ManyToOne(targetEntity: VehicleBrand::class, inversedBy: 'vehicles'),
+        ORM\JoinColumn(name: "brand_id", referencedColumnName: "id")
+    ]
+    private $brand;
+
+    #[ORM\Column(type: 'boolean')]
+    private $is_avaliablity;
+
     public function __construct()
     {
         $this->rentedVehicles = new ArrayCollection();
@@ -150,6 +159,30 @@ class Vehicle
     public function setCategory(?VehicleCategory $category): self
     {
         $this->category = $category;
+
+        return $this;
+    }
+
+    public function getBrand(): ?VehicleBrand
+    {
+        return $this->brand;
+    }
+
+    public function setBrand(?VehicleBrand $brand): self
+    {
+        $this->brand = $brand;
+
+        return $this;
+    }
+
+    public function isIsAvaliablity(): ?bool
+    {
+        return $this->is_avaliablity;
+    }
+
+    public function setIsAvaliablity(bool $is_avaliablity): self
+    {
+        $this->is_avaliablity = $is_avaliablity;
 
         return $this;
     }
