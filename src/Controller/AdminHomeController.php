@@ -18,7 +18,10 @@ class AdminHomeController extends AbstractController
     /**
      * @return Response
      */
-    #[Route('/admin/', name: 'app_admin_home')]
+    #[
+        Route('/admin/', name: 'app_admin_home'),
+        //@todo Security() can be implement
+    ]
     public function index(): Response
     {
         //@todo this line should be uncommented later

@@ -39,6 +39,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: 'boolean', nullable: true)]
     private bool $is_admin=false;
 
+    #[ORM\Column(type: 'string', length: 255, nullable: true,name: 'full_name')]
+    private $fullName;
+
     public function __construct()
     {
         $this->rentedVehicles = new ArrayCollection();
@@ -158,6 +161,18 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setIsAdmin(?bool $is_admin): self
     {
         $this->is_admin = $is_admin;
+
+        return $this;
+    }
+
+    public function getFullName(): ?string
+    {
+        return $this->fullName;
+    }
+
+    public function setFullName(?string $fullName): self
+    {
+        $this->fullName = $fullName;
 
         return $this;
     }

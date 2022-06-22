@@ -24,9 +24,13 @@ class VehicleCategory
     #[ORM\OneToMany(mappedBy: 'category', targetEntity: Vehicle::class)]
     private $vehicles;
 
+    #[ORM\OneToMany(mappedBy: 'category', targetEntity: VehicleFeature::class)]
+    private $vehicleFeatures;
+
     public function __construct()
     {
         $this->vehicles = new ArrayCollection();
+        $this->vehicleFeatures = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -82,6 +86,36 @@ class VehicleCategory
             // set the owning side to null (unless already changed)
             if ($vehicle->getCategory() === $this) {
                 $vehicle->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, VehicleFeature>
+     */
+    public function getVehicleFeatures(): Collection
+    {
+        return $this->vehicleFeatures;
+    }
+
+    public function addVehicleFeature(VehicleFeature $vehicleFeature): self
+    {
+        if (!$this->vehicleFeatures->contains($vehicleFeature)) {
+            $this->vehicleFeatures[] = $vehicleFeature;
+            $vehicleFeature->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeVehicleFeature(VehicleFeature $vehicleFeature): self
+    {
+        if ($this->vehicleFeatures->removeElement($vehicleFeature)) {
+            // set the owning side to null (unless already changed)
+            if ($vehicleFeature->getCategory() === $this) {
+                $vehicleFeature->setCategory(null);
             }
         }
 
