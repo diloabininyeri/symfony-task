@@ -1,4 +1,4 @@
-<?php
+<?php /**@noinspection PhpUnused */
 
 namespace App\Entity;
 
@@ -7,19 +7,22 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+/**
+ * @todo can create more curable helper methods, not completely clean code...
+ */
 #[ORM\Entity(repositoryClass: VehicleBrandRepository::class),ORM\Table(name: 'vehicle_brands')]
 class VehicleBrand
 {
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int  $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\OneToMany(mappedBy: 'brand', targetEntity: Vehicle::class)]
-    private $vehicles;
+    private ArrayCollection $vehicles;
 
     public function __construct()
     {
@@ -64,6 +67,7 @@ class VehicleBrand
     public function removeVehicle(Vehicle $vehicle): self
     {
         if ($this->vehicles->removeElement($vehicle)) {
+            // @todo remove vehicle event
             // set the owning side to null (unless already changed)
             if ($vehicle->getBrand() === $this) {
                 $vehicle->setBrand(null);
@@ -71,5 +75,13 @@ class VehicleBrand
         }
 
         return $this;
+    }
+
+    /**
+     * @param int $id
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
     }
 }
