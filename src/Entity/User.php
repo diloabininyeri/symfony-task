@@ -34,7 +34,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @todo  may type declaration will be remove ,because symfony cant assign it  by orm when type declared ...
      */
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: RentedVehicle::class), ORM\JoinColumn(name: 'user_id')]
-    private ArrayCollection $rentedVehicles;
+    private  $rentedVehicles;
+
+    #[ORM\Column(type: 'boolean', nullable: true)]
+    private bool $is_admin=false;
 
     public function __construct()
     {
@@ -145,5 +148,17 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    public function isIsAdmin(): ?bool
+    {
+        return $this->is_admin;
+    }
+
+    public function setIsAdmin(?bool $is_admin): self
+    {
+        $this->is_admin = $is_admin;
+
+        return $this;
     }
 }
