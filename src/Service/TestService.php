@@ -21,6 +21,6 @@ class TestService implements TestServiceInterface
     {
         $vehicle = $this->managerRegistry->getRepository(Vehicle::class)->find(1);
 
-        dd($vehicle->getColor()->getName());
+        dd($vehicle->getCategory()->getName());
     }
 }

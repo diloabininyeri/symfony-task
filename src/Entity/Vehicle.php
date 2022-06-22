@@ -36,6 +36,12 @@ class Vehicle
     #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: RentedVehicle::class)]
     private $rentedVehicles;
 
+    #[
+        ORM\ManyToOne(targetEntity: VehicleCategory::class, inversedBy: 'vehicles'),
+        ORM\JoinColumn(name: "category_id", referencedColumnName: "id")
+    ]
+    private $category;
+
     public function __construct()
     {
         $this->rentedVehicles = new ArrayCollection();
@@ -132,6 +138,18 @@ class Vehicle
                 $rentedVehicle->setVehicles(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getCategory(): ?VehicleCategory
+    {
+        return $this->category;
+    }
+
+    public function setCategory(?VehicleCategory $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }
