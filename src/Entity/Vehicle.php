@@ -13,10 +13,10 @@ class Vehicle
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
-    private $id;
+    private int $id;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $name;
+    private string $name;
 
     #[ORM\Column(type: 'datetime_immutable')]
     private $created_at;
@@ -25,7 +25,7 @@ class Vehicle
     private $updated_at;
 
     #[ORM\Column(type: 'string', length: 255)]
-    private $image;
+    private string $image;
 
     #[
         ORM\ManyToOne(targetEntity: Color::class, inversedBy: 'vehicles', /*fetch: 'EAGER'*/),
@@ -48,8 +48,8 @@ class Vehicle
     ]
     private $brand;
 
-    #[ORM\Column(type: 'boolean')]
-    private $is_avaliablity;
+    #[ORM\Column(type: 'boolean', options: "{de}")]
+    private bool $is_avaliablity = true; //default vehicle rent status is true ,can be change according the status
 
     public function __construct()
     {
