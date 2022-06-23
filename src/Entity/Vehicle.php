@@ -85,7 +85,13 @@ class Vehicle
      * @var bool
      */
     #[ORM\Column(type: 'boolean')]
-    private bool $is_availability = true; //default vehicle rent status is true ,can be change according the status
+    private bool $is_availability = true;
+
+    #[
+        ORM\OneToMany(mappedBy: 'vehicle', targetEntity: VehicleValue::class),
+        ORM\JoinColumn(name: "vehicle_id", referencedColumnName: "id") //@todo this line can be remove
+    ]
+    private $value; //default vehicle rent status is true ,can be change according the status
 
     /**
      *
@@ -93,6 +99,7 @@ class Vehicle
     public function __construct()
     {
         $this->rentedVehicles = new ArrayCollection();
+        $this->value = new ArrayCollection();
     }
 
     /**
@@ -306,5 +313,35 @@ class Vehicle
     public function setId(int $id): void
     {
         $this->id = $id;
+    }
+
+    /**
+     * @return Collection<int, VehicleValue>
+     */
+    public function getValue(): Collection
+    {
+        return $this->value;
+    }
+
+    public function addValue(VehicleValue $value): self
+    {
+        if (!$this->value->contains($value)) {
+            $this->value[] = $value;
+            $value->setVehicle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeValue(VehicleValue $value): self
+    {
+        if ($this->value->removeElement($value)) {
+            // set the owning side to null (unless already changed)
+            if ($value->getVehicle() === $this) {
+                $value->setVehicle(null);
+            }
+        }
+
+        return $this;
     }
 }
