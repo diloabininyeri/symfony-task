@@ -18,5 +18,4 @@ trait CheckAdmin
          */
         $this->abortIf(!($user?->isAdmin()), 'page page not found');
     }
-
 }

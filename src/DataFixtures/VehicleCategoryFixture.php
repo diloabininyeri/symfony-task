@@ -43,7 +43,6 @@ class VehicleCategoryFixture extends Fixture
             $vehicleCategory->setName($category['name']);
             $vehicleCategory->setDescription($category['description']);
             $manager->persist($vehicleCategory);
-
         }
         $manager->flush();
     }

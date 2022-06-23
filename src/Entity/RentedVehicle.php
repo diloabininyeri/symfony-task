@@ -34,7 +34,7 @@ class RentedVehicle
     #[ORM\Column(type: 'date_immutable')]
     private $rental_date;
 
-    #[ORM\Column(type: 'date_immutable',nullable: true)]
+    #[ORM\Column(type: 'date_immutable', nullable: true)]
     private $delivery_date;
 
     public function getId(): ?int

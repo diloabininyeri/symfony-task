@@ -16,6 +16,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
 #[UniqueEntity(fields: ['email'], message: 'There is already an account with this email')]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+    public const  ROLE_ADMIN = 'ROLE_ADMIN';
     #[ORM\Id]
     #[ORM\GeneratedValue]
     #[ORM\Column(type: 'integer')]
@@ -34,12 +35,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @todo  may type declaration will be remove ,because symfony cant assign it  by orm when type declared ...
      */
     #[ORM\OneToMany(mappedBy: 'users', targetEntity: RentedVehicle::class), ORM\JoinColumn(name: 'user_id')]
-    private  $rentedVehicles;
+    private $rentedVehicles;
 
-    #[ORM\Column(type: 'boolean', nullable: true)]
-    private bool $is_admin=false;
-
-    #[ORM\Column(type: 'string', length: 255, nullable: true,name: 'full_name')]
+    #[ORM\Column(type: 'string', length: 255, nullable: true, name: 'full_name')]
     private $fullName;
 
     public function __construct()
@@ -153,18 +151,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->id = $id;
     }
 
-    public function isAdmin(): ?bool
-    {
-        return $this->is_admin;
-    }
-
-    public function setIsAdmin(?bool $is_admin): self
-    {
-        $this->is_admin = $is_admin;
-
-        return $this;
-    }
-
     public function getFullName(): ?string
     {
         return $this->fullName;
@@ -175,5 +161,60 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $this->fullName = $fullName;
 
         return $this;
+    }
+
+    /**
+     * @param array $roles
+     * @return $this
+     */
+    public function removeRoles(array $roles): self
+    {
+        $this->roles = array_diff($this->roles, $roles);
+        return $this;
+    }
+
+    /**
+     * @param string $role
+     * @return $this
+     */
+    public function addRole(string $role): self
+    {
+        return $this->addRoles([$role]);
+    }
+
+    /**
+     * @param array $roles
+     * @return $this
+     */
+    public function addRoles(array $roles): self
+    {
+        $this->roles = array_unique(
+            array_merge($this->roles, $roles)
+        );
+        return $this;
+    }
+
+    /**
+     * @return $this
+     */
+    public function giveRoleAdminPermission(): self
+    {
+        return $this->addRole(self::ROLE_ADMIN);
+    }
+
+    /**
+     * @return $this
+     */
+    public function removeAdminPermission(): self
+    {
+        return $this->removeRoles([self::ROLE_ADMIN]);
+    }
+
+    /**
+     * @return bool
+     */
+    public function isAdmin(): bool
+    {
+        return in_array(self::ROLE_ADMIN, $this->roles, true);
     }
 }

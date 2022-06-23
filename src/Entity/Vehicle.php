@@ -61,7 +61,7 @@ class Vehicle
      * @var ArrayCollection
      */
     #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: RentedVehicle::class)]
-    private  $rentedVehicles;
+    private $rentedVehicles;
 
     /**
      * @var VehicleCategory|null
