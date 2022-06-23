@@ -1,18 +1,18 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Frontend;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
-class TermController extends AbstractController
+class TeamController extends AbstractController
 {
-    #[Route('/terms.html', name: 'app_term')]
+    #[Route('/team.html', name: 'app_team')]
     public function index(): Response
     {
-        return $this->render('term/index.html.twig', [
-            'controller_name' => 'TermController',
+        return $this->render('team/index.html.twig', [
+            'controller_name' => 'TeamController',
         ]);
     }
 }
