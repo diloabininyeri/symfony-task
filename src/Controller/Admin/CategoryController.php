@@ -2,6 +2,7 @@
 
 namespace App\Controller\Admin;
 
+use App\Form\CategoryFormType;
 use App\Structure\Interfaces\CategoryServiceInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -19,9 +20,13 @@ class CategoryController extends AbstractController
     ]
     public function index(): Response
     {
+        $form = $this->createForm(CategoryFormType::class);
+
         return $this->render(
             'admin/category/add_category.html.twig',
-            []
+            [
+                'form' => $form->createView()
+            ]
         );
     }
 
