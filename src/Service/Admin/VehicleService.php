@@ -33,4 +33,14 @@ class VehicleService implements VehicleServiceInterface
             ->getRepository(self::ENTITY)
             ->find($id);
     }
+
+    /**
+     * @return array|Vehicle[]
+     */
+    public function findAll(): array
+    {
+        return $this->entityManager
+            ->getRepository(self::ENTITY)
+            ->findAll();
+    }
 }
