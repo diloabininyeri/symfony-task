@@ -1,17 +1,45 @@
-<!doctype html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport"
-          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
-    <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
-</head>
-<body>
-<h2>fefef</h2>
-{% for vehicle in vehicles %}
-    {{ dump(vehicle.value.toArray) }}
-    {{ dump(vehicle) }}
-{%  endfor %}
-</body>
-</html>
+{%  extends 'admin/layout/base.html.twig' %}
+
+{% block title %}test {% endblock %}
+
+{% block content %}
+<!-- Small boxes (Stat box) -->
+<div class="row">
+    <div class="col-12">
+
+        <table class="table">
+            <thead class="thead-light">
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">vehicle id</th>
+                <th scope="col">name</th>
+                <th scope="col">brand</th>
+                <th scope="col">model year</th>
+                <th scope="col">color</th>
+                <th scope="col">availability</th>
+                <th scope="col">detail</th>
+            </tr>
+            </thead>
+            <tbody>
+
+            {% for vehicle in vehicles %}
+            <tr>
+                <th scope="row">1</th>
+                <td>{{ vehicle.id }}</td>
+                <td>{{ vehicle.name }}</td>
+                <td>{{ vehicle.brand.name }}</td>
+                <td>{{ vehicle.category.name }}-{{ vehicle.getModelYear }}</td>
+                <td>{{ vehicle.color.name }}</td>
+                <td><button class="btn {{ vehicle.isIsAvailability ? 'btn-success':'btn-danger' }}">{{vehicle.isIsAvailability ? 'yes':'no' }}</button></td>
+                <td><button class="btn btn-info">goto detail</button></td>
+            </tr>
+            {% endfor %}
+            </tbody>
+        </table>
+
+    </div>
+    <!-- ./col -->
+</div>
+
+
+{% endblock %}

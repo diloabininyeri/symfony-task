@@ -91,7 +91,10 @@ class Vehicle
         ORM\OneToMany(mappedBy: 'vehicle', targetEntity: VehicleValue::class),
         ORM\JoinColumn(name: "vehicle_id", referencedColumnName: "id") //@todo this line can be remove
     ]
-    private $value; //default vehicle rent status is true ,can be change according the status
+    private $value;
+
+    #[ORM\Column(type: 'string', length: 4)]
+    private $model_year; //default vehicle rent status is true ,can be change according the status
 
     /**
      *
@@ -341,6 +344,18 @@ class Vehicle
                 $value->setVehicle(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getModelYear(): ?string
+    {
+        return $this->model_year;
+    }
+
+    public function setModelYear(string $model_year): self
+    {
+        $this->model_year = $model_year;
 
         return $this;
     }
