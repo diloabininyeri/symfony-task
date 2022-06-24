@@ -5,6 +5,7 @@ namespace App\Controller\Admin;
 namespace App\Controller\Admin;
 
 use App\Entity\Vehicle;
+use App\Structure\Interfaces\VehicleServiceInterface;
 use Doctrine\ORM\EntityManagerInterface;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\IsGranted;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -31,12 +32,9 @@ class VehicleController extends AbstractController
     #[
         Route('/admin/vehicle/{id}', name: 'app_admin_vehicle_detail'),
     ]
-    public function show(int $id, EntityManagerInterface $entityManager): Response
+    public function show(VehicleServiceInterface $service, int $id): Response
     {
-        $vehicle = $entityManager
-            ->getRepository(Vehicle::class)
-            ->find($id);
-
+        $vehicle = $service->find($id);
         return $this->render(
             'admin/vehicle/vehicle_detail.html.twig',
             compact('vehicle')
