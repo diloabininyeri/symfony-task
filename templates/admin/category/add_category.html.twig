@@ -6,6 +6,13 @@
     <!-- Small boxes (Stat box) -->
     <div class="row">
         <div class="col-12">
+            {%if vehicle_category.id %}
+                <div class="alert alert-success">Category has been saved</div>
+            {% endif %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
             {{ form(form) }}
         </div>
         <!-- ./col -->
