@@ -27,6 +27,7 @@ class AdminFixture extends Fixture
         $user = new User();
         $user->setEmail('admin@admin.com');
         $user->giveRoleAdminPermission();
+        $user->setFullName('Anto Pujić ');
         $user->setPassword($this->createHashPassword());
         $manager->persist($user);
 

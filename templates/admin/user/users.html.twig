@@ -1,0 +1,41 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}test {% endblock %}
+
+{% block content %}
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-12">
+
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">user id</th>
+                    <th scope="col">email</th>
+                    <th scope="col">full name</th>
+                    <th scope="col">admin </th>
+
+                </tr>
+                </thead>
+                <tbody>
+
+                {% for user in users %}
+                    <tr>
+                        <th scope="row">-</th>
+                        <td>{{ user.id }}</td>
+                        <td>{{ user.email }}</td>
+                        <td>{{ user.fullName}}</td>
+                        <td>
+                            <button class="btn {{ user.isAdmin ? 'btn-success':'btn-danger'}} ">{{ user.isAdmin ? 'yes':'no' }}</button>
+                        </td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+
+        </div>
+        <!-- ./col -->
+    </div>
+
+{% endblock %}
