@@ -24,8 +24,24 @@ class VehicleController extends AbstractController
         // @todo this should be paginate
         $vehicles = $entityManager->getRepository(Vehicle::class)->findAll();
         return $this->render(
-            'admin/vehicles.html.twig',
+            'admin/vehicle/vehicles.html.twig',
             compact('vehicles')
+        );
+    }
+
+    #[
+        Route('/admin/vehicle/{id}', name: 'app_admin_vehicle_detail'),
+    ]
+    public function show(int $id, EntityManagerInterface $entityManager): Response
+    {
+
+        $vehicle = $entityManager
+            ->getRepository(Vehicle::class)
+            ->find($id);
+
+        return $this->render(
+            'admin/vehicle/vehicle_detail.html.twig',
+            compact('vehicle')
         );
     }
 }

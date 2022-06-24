@@ -60,7 +60,10 @@ class Vehicle
     /**
      * @var ArrayCollection
      */
-    #[ORM\OneToMany(mappedBy: 'vehicles', targetEntity: RentedVehicle::class)]
+    #[
+        ORM\OneToMany(mappedBy: 'vehicles', targetEntity: RentedVehicle::class),
+        ORM\OrderBy(['id'=>'desc'])
+    ]
     private $rentedVehicles;
 
     /**

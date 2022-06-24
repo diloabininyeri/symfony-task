@@ -1,0 +1,60 @@
+{% extends 'admin/layout/base.html.twig' %}
+
+{% block title %}test {% endblock %}
+
+{% block content %}
+    <!-- Small boxes (Stat box) -->
+    <div class="row">
+        <div class="col-12 p-5">
+
+            <div class="col-6">
+                <img class="img-fluid" src="{{ vehicle.image }}" alt="">
+            </div>
+            <div class="col-6">
+                <p>{{ vehicle.name }} - {{ vehicle.getModelYear }}</p>
+            </div>
+        </div>
+        <!-- ./col -->
+    </div>
+    <div class="row">
+        <div class="col-12 align-center">
+            <hr>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-12 p-5">
+            <table class="table">
+                <thead class="thead-light">
+                <tr>
+                    <th scope="col">*</th>
+                    <th scope="col">user email</th>
+                    <th scope="col">user name</th>
+                    <th scope="col"> rental date</th>
+                    <th scope="col">delivery date</th>
+                </tr>
+                </thead>
+                <tbody>
+
+
+                {% for rentedVehicle in vehicle.rentedVehicles %}
+                    <tr>
+                        <th scope="row">-</th>
+                        <td>{{ rentedVehicle.users.email }}</td>
+                        <td>{{ rentedVehicle.users.getFullName }}</td>
+                        <td>{{ rentedVehicle.getRentalDate.format('Y-m-d H:i:s') }}</td>
+                        <td>
+
+                            {{ rentedVehicle.getDeliveryDate.format('Y-m-d H:i:s') | default('yet not delivered') }}
+                        </td>
+                    </tr>
+                {% endfor %}
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+
+
+{% endblock %}
