@@ -16,7 +16,6 @@ use Symfony\Component\Routing\Annotation\Route;
  */
 class UserController extends AbstractController
 {
-
     #[
         Route('/admin/users', name: 'app_admin_users'),
         IsGranted('ROLE_ADMIN')

@@ -39,8 +39,6 @@ class AdminFixture extends Fixture
      */
     private function createHashPassword(): string
     {
-
-
         return $this->password;
     }
 }

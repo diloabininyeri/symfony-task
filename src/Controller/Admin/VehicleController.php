@@ -2,7 +2,6 @@
 
 namespace App\Controller\Admin;
 
-
 namespace App\Controller\Admin;
 
 use App\Entity\Vehicle;
@@ -34,7 +33,6 @@ class VehicleController extends AbstractController
     ]
     public function show(int $id, EntityManagerInterface $entityManager): Response
     {
-
         $vehicle = $entityManager
             ->getRepository(Vehicle::class)
             ->find($id);
