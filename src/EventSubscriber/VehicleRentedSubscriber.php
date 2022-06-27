@@ -3,7 +3,9 @@
 namespace App\EventSubscriber;
 
 use App\EventListener\VehicleRentedEvent;
+use App\Structure\Interfaces\VehicleRentedEventInterface;
 use JetBrains\PhpStorm\ArrayShape;
+use JetBrains\PhpStorm\NoReturn;
 use Symfony\Component\EventDispatcher\EventSubscriberInterface;
 
 /**
@@ -23,15 +25,15 @@ class VehicleRentedSubscriber implements EventSubscriberInterface
     }
 
     /**
-     * @param VehicleRentedEvent $event
+     * @param VehicleRentedEventInterface $event
      * @return void
      */
-    public function onRented(VehicleRentedEvent $event): void
+    #[NoReturn]
+    public function onRented(VehicleRentedEventInterface $event): void
     {
 
         //@todo should use queue operations
-
-        $user=$event->getUser();
-        $vehicle=$event->getVehicle();
+        $user = $event->getUser();
+        $vehicle = $event->getVehicle();
     }
 }

@@ -4,11 +4,12 @@ namespace App\EventListener;
 
 use App\Entity\User;
 use App\Entity\Vehicle;
+use App\Structure\Interfaces\VehicleRentedEventInterface;
 
 /**
  *
  */
-class VehicleRentedEvent
+class VehicleRentedEvent implements VehicleRentedEventInterface
 {
     /**
      *
